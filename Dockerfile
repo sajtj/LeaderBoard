@@ -1,5 +1,4 @@
-FROM python:3.10
-
+FROM python:3.9
 
 WORKDIR /app
 
@@ -10,4 +9,4 @@ RUN poetry install
 
 ADD ./ /app/
 
-CMD [ "poetry run python -m web.manage runserver 0.0.0.0:8000" ]
+CMD [ "poetry run python -m web.manage runserver 0.0.0.0:8000" ]`

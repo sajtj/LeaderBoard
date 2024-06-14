@@ -13,8 +13,8 @@ redis = "^5.0.6"
 django = "^5.0.6"
 django-redis = "^5.4.0"
 docker = "^7.1.0"
-psycopg2 = "^2.9.9"
 requests = "2.31.0"
+psycopg2-binary = "^2.9.9"
 
 
 [build-system]
