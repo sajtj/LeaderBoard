@@ -50,7 +50,7 @@ class GameDetailAPIView(views.APIView) :
         
             
 class UsersLeaderBoardAPIView(views.APIView) :
-    # permission_classes = (permissions.IsAuthenticated, )
+    permission_classes = (permissions.IsAuthenticated, )
     
     @extend_schema(
         responses={200: 'OK.'}

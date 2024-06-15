@@ -1,7 +1,3 @@
-# poetry run python -m web.manage dumpdata accounts > web/prediction/fixtures/users.json
-# poetry run python -m web.manage dumpdata  prediction.Team > web/prediction/fixtures/teams.json
-# poetry run python -m web.manage dumpdata prediction.Game > web/prediction/fixtures/games.json
-# poetry run python -m web.manage dumpdata prediction.GamesLeaderBoard > web/prediction/fixtures/gamesleaderboard.json
 # poetry run python -m web.manage test web.prediction
 from django.urls import reverse
 from rest_framework import status

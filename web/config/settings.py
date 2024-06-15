@@ -55,24 +55,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'web.config.wsgi.application'
 
-# if os.environ.get("PRODUCTION") :
-#     DATABASES = {
-#         "default": {
-#             "ENGINE": "django.db.backends.postgresql",
-#             "NAME": os.environ.get("POSTGRES_DB"),
-#             "USER": os.environ.get("POSTGRES_USER"),
-#             "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
-#             "HOST": os.environ.get("POSTGRES_HOST"),
-#             "PORT": os.environ.get("POSTGRES_PORT"),
-#     }
-# }
-# else :
-# DATABASES = {
-#     "default": {
-#         "DATABASE_URL": os.environ.get("DATABASE_URL"),
-#         "ATOMIC_REQUESTS": True
-#     }
-# }
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -114,15 +97,6 @@ SPECTACULAR_SETTINGS = {
     "COMPONENT_SPLIT_REQUEST": True,
 }
 
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION": os.getenv("REDIS_URL"),
-#         "OPTIONS": {
-#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-#         },
-#     }
-# }
 
 
 LANGUAGE_CODE = 'en-us'

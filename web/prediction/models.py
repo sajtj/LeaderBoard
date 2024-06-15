@@ -48,6 +48,7 @@ class GamesLeaderBoard(models.Model) :
     games = models.ManyToManyField(Game, related_name='leaderboard')
     games_leaderboard_scoresheet = models.JSONField(default=dict, null=True, blank=True)
 
+
 class Prediction(models.Model) :
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     game_prediction = models.ForeignKey(Game, on_delete=models.CASCADE)
@@ -59,4 +60,7 @@ class Prediction(models.Model) :
     score = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self) :
+        return f"{self.user.username} : {self.game_prediction}"
     
