@@ -1,0 +1,10 @@
+[
+    {
+        "model": "prediction.gamesleaderboard",
+        "pk": 7,
+        "fields": {
+            "games_leaderboard_scoresheet": {},
+            "games": [5, 6]
+        }
+    }
+]

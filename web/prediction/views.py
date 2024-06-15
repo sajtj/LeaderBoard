@@ -1,6 +1,6 @@
 from rest_framework import views, response, status, permissions
 from drf_spectacular.utils import extend_schema
-from .models import GamesLeaderBoard, Game
+from .models import GamesLeaderBoard, Game, Prediction
 from .serializers import GameDetailSerializer, InputPredictionSerializer
 from .permissions import GamePermissions
 
@@ -40,14 +40,17 @@ class GameDetailAPIView(views.APIView) :
         self.check_object_permissions(request, game)
         leaderboard = GamesLeaderBoard.objects.get(id=pk_l)
         serializer = InputPredictionSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
         
-        if serializer.is_valid(raise_exception=True) :
-            serializer.save(user=user, game_prediction=game, games_leaderboard=leaderboard)
-            return response.Response(status=status.HTTP_201_CREATED)
+        if Prediction.objects.filter(user=user, game_prediction=game).exists() :
+            return response.Response(status=status.HTTP_403_FORBIDDEN)
+        
+        serializer.save(user=user, game_prediction=game, games_leaderboard=leaderboard)
+        return response.Response(status=status.HTTP_201_CREATED)
         
             
 class UsersLeaderBoardAPIView(views.APIView) :
-    permission_classes = (permissions.IsAuthenticated, )
+    # permission_classes = (permissions.IsAuthenticated, )
     
     @extend_schema(
         responses={200: 'OK.'}

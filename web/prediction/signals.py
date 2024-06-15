@@ -1,6 +1,6 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from .models import Game, Prediction
+from .models import Game, Prediction, GameStatus
 from .utils import redis_connection
 
 redis_client = redis_connection()
@@ -26,7 +26,7 @@ def sorted_users(cache_key) :
 
 @receiver(post_save, sender=Game)
 def update_game_status(sender, instance, created, **kwargs):
-    if not created and instance.status == 'EN':
+    if not created and instance.status == GameStatus.Endded :
         predictions = Prediction.objects.filter(game_prediction=instance)
         games_leaderboard = predictions.first().games_leaderboard
         cache_key = "leaderboard_" + str(games_leaderboard.id)
@@ -40,6 +40,5 @@ def update_game_status(sender, instance, created, **kwargs):
         result = [{'user': user, 'score': score} for user, score in users_sorted]
         games_leaderboard.games_leaderboard_scoresheet = {"scoresheet": result}
         games_leaderboard.save()
-        
             
 

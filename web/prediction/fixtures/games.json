@@ -1,0 +1,28 @@
+[
+    {
+        "model": "prediction.game",
+        "pk": 5,
+        "fields": {
+            "home_team": 1,
+            "away_team": 2,
+            "home_team_goals": null,
+            "away_team_goals": null,
+            "game_date": "2024-06-16T08:42:13Z",
+            "status": "NS",
+            "result": null
+        }
+    },
+    {
+        "model": "prediction.game",
+        "pk": 6,
+        "fields": {
+            "home_team": 3,
+            "away_team": 4,
+            "home_team_goals": 1,
+            "away_team_goals": 0,
+            "game_date": "2024-06-15T08:00:31Z",
+            "status": "OP",
+            "result": null
+        }
+    }
+]

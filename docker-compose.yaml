@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  postgres:
+  pgdb:
     image : postgres:14.1-alpine
-    container_name: postgres
+    container_name: pgdb
     ports:
       - '5432:5432'
     environment:
@@ -12,6 +12,8 @@ services:
       - POSTGRES_PASSWORD=N!lva
     volumes: 
       - postgres-data:/var/lib/postgresql
+    # networks:
+    #   - mynetwork
 
   redis:
     image: redis:latest
@@ -20,28 +22,41 @@ services:
       - 6379:6379
     volumes:
       - redis-data:/data
+    # networks:
+    #   - mynetwork
 
-  django:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    command: poetry run python -m web.manage runserver 0.0.0.0:8000
-    environment:
-      - DATABASE_URL=psql://Nilva:N!lva@postgres:5432/Nilva
-      - REDIS_URL=redis://127.0.0.1:6379/0
-      - SECRET_KEY=django-insecure-b$7cx%+wcj^8v6fuek@k^j)-oc+72x=ida0aw$n%anxus#us%5
-      - DEBUG=True
-    ports:
-      - "8000:8000"
-    volumes:
-      - .:/app
-    depends_on:
-      - postgres
-      - redis
-    restart: on-failure
+  # django:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   command: poetry run python -m web.manage runserver 0.0.0.0:8000
+  #   depends_on:
+  #     - postgres
+  #     - redis
+  #   environment:
+  #     POSTGRES_USER: Nilva
+  #     POSTGRES_DB: Nilva
+  #     POSTGRES_PASSWORD: Nilva
+  #     POSTGRES_PORT: 5432
+  #     POSTGRES_HOST: postgres
+  #     # - DATABASE_URL=psql://Nilva:N!lva@postgres:5432/Nilva
+  #     REDIS_URL: redis://127.0.0.1:6379/0
+  #     SECRET_KEY: django-insecure-b$7cx%+wcj^8v6fuek@k^j)-oc+72x=ida0aw$n%anxus#us%5
+  #     DEBUG: True
+  #     PRODUCTION: False
+  #   ports:
+  #     - "8000:8000"
+  #   volumes:
+  #     - .:/app
+    
+  #   restart: on-failure
 
 
 volumes:
   postgres-data:
   redis-data:
+
+# networks:
+#   mynetwork:
+#     driver: bridge
 
